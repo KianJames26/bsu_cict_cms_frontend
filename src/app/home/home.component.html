@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+<style>
+    .navbar {
+      height: 10%;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #5c5a5a;
+      overflow-x: hidden;
+    }
+    .navbar a {
+      font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      text-align: left; 
+      font-size: 22px;
+      color: #e7e1e1;
+      display: block;
+      margin-left: 26%;
+      margin-top: 1%;
+    }    
+    .sidenav {
+      height: 100%;
+      width: 25%;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #464444;
+      overflow-x: hidden;
+      padding-top: 20px;
+    }
+    
+    .sidenav a {
+      text-align: left;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-weight: bold;
+      font-size: 16px;
+      color: #e7e5e5;
+      display: block;
+    }
+    .sidenav a:hover {
+      color: #f1f1f1;
+    }
+    
+    .container p{
+      font-size: 20px;
+    }
+    .main {
+      margin-left: 160px; /* Same as the width of the sidenav */
+      font-size: 28px; /* Increased text to enable scrolling */
+      padding: 0px 10px;
+    }
+    
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+  .dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    }
+
+    .metric {
+      flex: 1;
+      padding: 50px;
+      text-align: center;
+      border-radius: 8px;
+    }
+    .metric p {
+        color:black;
+        font-size: 20px;
+        font-weight: bold;
+      }
+    .metric.apcu {
+      border: 3px solid green;
+      background-color: white;
+      color: green;
+    }
+
+    .metric.pecu {
+      border: 3px solid red;
+      background-color: white;
+      color: red;
+    }
+
+    </style>
+    
+<div class="sidenav">
+    <a class="w3-bar-item w3-button" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/users" routerLinkActive="active">User Management</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/CSM" routerLinkActive="active">Course Subject Management</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/STM" routerLinkActive="active">Specialization Track Management</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/CUM" routerLinkActive="active">Curriculum Management</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/CM" routerLinkActive="active">Committee Management</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/feedback" routerLinkActive="active">Feedback</a>
+    <br>
+    <a class="w3-button w3-bottom" style="width:25%" routerLink="/settings" routerLinkActive="active">Settings</a>
+</div>
+<div class="navbar">
+  <a>CICT Curriculum Management System > Dashboard</a> 
+</div>
+<br><br><br><br>
+<div style="margin-left:26%">
+<div class="p-4">
+    <div class="container">
+        <h1>Hi {{user?.firstName}}!</h1>
+        <p>Welcome to CICT Curriculum Management System</p>
+    </div>
+</div>
+<br><br>
+<div class="dashboard">
+  <div class="metric" [ngClass]="{'apcu': users.trend === 'apcu', 'pecu': users.trend === 'pecu'}">
+    <h2>{{ users.value }}</h2>
+    <p>Approved Curriculums</p>
+  </div>
+  <div class="metric" [ngClass]="{'apcu': revenue.trend === 'apcu', 'pecu': revenue.trend === 'pecu'}">
+    <h2>{{ revenue.value }}</h2>
+    <p>Pending Curriculums</p>
+  </div>
+  <div class="metric" [ngClass]="{'apcu': revenue.trend === 'apcu', 'pecu': revenue.trend === 'pecu'}">
+    <h2>{{ revenue.value }}</h2>
+    <p>Curriculums for Revision</p>
+  </div>
+  
+</div>
+
+</div>
+
+</body>
+</html>

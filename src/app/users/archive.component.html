@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+    <style>
+        .navbar {
+          height: 10%;
+          width: 100%;
+          position: fixed;
+          top: 0;
+          left: 0;
+          background-color: #5c5a5a;
+          overflow-x: hidden;
+          }
+        .navbar a {
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        text-align: left; 
+        font-size: 22px;
+        color: #e7e1e1;
+        display: block;
+        margin-left: 26%;
+        margin-top: 1%;
+         }   
+        .sidenav {
+          height: 100%;
+          width: 25%;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          background-color: #464444;
+          overflow-x: hidden;
+          padding-top: 20px;
+        }
+        .sidenav a {
+          text-align: left;
+          font-family: Georgia, 'Times New Roman', Times, serif;
+          font-weight: bold;
+          font-size: 16px;
+          color: #e7e5e5;
+          display: block;
+        }
+        
+        .sidenav a:hover {
+          color: #ffffff;
+        }
+        
+        .main {
+          margin-left: 160px; /* Same as the width of the sidenav */
+          font-size: 28px; /* Increased text to enable scrolling */
+          padding: 0px 10px;
+        }
+        
+        @media screen and (max-height: 450px) {
+          .sidenav {padding-top: 15px;}
+          .sidenav a {font-size: 18px;}
+        }
+        
+        
+</style>
+<!-- side bar -->
+<div class="sidenav">
+    <a class="w3-bar-item w3-button"  routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/users" routerLinkActive="active">User Management</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/CSM" routerLinkActive="active">Course Subject Management</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/STM" routerLinkActive="active">Specialization Track Management</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/CUM" routerLinkActive="active">Curriculum Management</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/CM" routerLinkActive="active">Committee Management</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/feedback" routerLinkActive="active">Feedback</a>
+    <br>
+    <a class="w3-button w3-bottom" style="width:25%" routerLink="/settings" routerLinkActive="active">Settings</a>
+</div>
+<div class="navbar">
+    <a>CICT Curriculum Management System > User Management > Archived Users</a> 
+</div>
+<div class="table" style="margin-left:26%">
+<br><br><br><br>
+<a routerLink="add" class="w3-button w3-round w3-ripple w3-green" >Add User</a>
+<div class="activearchive">
+  <a routerLink="/users" class="w3-button w3-right w3-ripple w3-dark-gray" >Active Users</a>
+</div>
+<table class="w3-table-all">
+    <thead>
+        <tr class="w3-gray">
+            <th style="width: 20%">Name</th>
+            <th style="width: 20%">Email Address</th>
+            <th style="width: 20%">Position</th>
+            <th style="width: 20%">Department</th>
+            <th style="width: 10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="w3-hover-gray" *ngFor="let user of users">
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.username}}</td>
+            <td style="white-space: nowrap">
+                <a routerLink="edit/{{user.id}}" class="w3-button w3-round w3-ripple w3-green">Edit</a>
+                <button (click)="deleteUser(user.id)" class="w3-button w3-round w3-ripple w3-red" [disabled]="user.isDeleting">
+                    <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!user.isDeleting">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!users">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>

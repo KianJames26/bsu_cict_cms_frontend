@@ -1,0 +1,6 @@
+{
+  "/*": {
+    "target": "https://bsucictcmsbackend-production.up.railway.app",
+    "secure": false
+  }
+}

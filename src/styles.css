@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing: border-box;
+}
+:host {
+    height: 100%;
+}
+html {
+    height: 100%;
+}
+body {
+    height: 100vh;
+    background-color: black;
+}
+.content{
+    height: 100%;
+}
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --text-color: #333333;
+  }
+  
+  .theme-1 {
+    --primary-color: #e83e8c;
+    --secondary-color: #343a40;
+    --text-color: #f8f9fa;
+  }
+  
+  .theme-2 {
+    --primary-color: #28a745;
+    --secondary-color: #6c757d;
+    --text-color: #333333;
+  }
+  
+  .theme-3 {
+    --primary-color: #ffc107;
+    --secondary-color: #6c757d;
+    --text-color: #333333;
+  }
+  

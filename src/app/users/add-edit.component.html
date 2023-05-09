@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+<body>
+  <style>
+    .navbar {
+      height: 10%;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #5c5a5a;
+      overflow-x: hidden;
+    }
+
+    .navbar a {
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      text-align: left;
+      font-size: 22px;
+      color: #e7e1e1;
+      display: block;
+      margin-left: 26%;
+      margin-top: 1%;
+    }
+
+    .sidenav {
+      height: 100%;
+      width: 25%;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #464444;
+      overflow-x: hidden;
+      padding-top: 20px;
+    }
+
+    .sidenav a {
+      text-align: left;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-weight: bold;
+      font-size: 16px;
+      color: #e7e5e5;
+      display: block;
+    }
+
+    .sidenav a:hover {
+      color: #ffffff;
+    }
+
+    .main {
+      margin-left: 160px;
+      /* Same as the width of the sidenav */
+      font-size: 28px;
+      /* Increased text to enable scrolling */
+      padding: 0px 10px;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {
+        padding-top: 15px;
+      }
+
+      .sidenav a {
+        font-size: 18px;
+      }
+    }
+  </style>
+  <div class="sidenav">
+    <a class="w3-bar-item w3-button" routerLink="/" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/users" routerLinkActive="active">User Management</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/CSM" routerLinkActive="active">Course Subject Management</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/STM" routerLinkActive="active">Specialization Track Management</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/CUM" routerLinkActive="active">Curriculum Management</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/CM" routerLinkActive="active">Committee Management</a>
+    <br>
+    <a class="w3-bar-item w3-button" routerLink="/feedback" routerLinkActive="active">Feedback</a>
+    <br>
+    <a class="w3-button w3-bottom" style="width:25%" routerLink="/settings" routerLinkActive="active">Settings</a>
+  </div>
+  <div class="navbar">
+    <a>CICT Curriculum Management System > User Management > {{title}}</a>
+  </div><br><br><br><br>
+  <form style="margin-left:26%" *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+
+      <!--Need to correct the typescript here-->
+      <div class="mb-3 col">
+        <label class="form-label">Username</label>
+        <input type="text" formControlName="username" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+          <div *ngIf="f.username.errors.required">The username field is required.</div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3 col">
+      <label class="form-label">Email Address</label>
+      <input type="text" formControlName="email" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">The Email field is required.</div>
+      </div>
+    </div>
+
+    <div class="mb-3 col">
+      <label class="form-label">
+        Password
+        <em *ngIf="id">(Leave blank to keep the same password)</em>
+      </label>
+      <input type="password" formControlName="password" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Password is required</div>
+        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+      </div>
+    </div>
+    <!--Need to correct the typescript here-->
+    <div class="row">
+      <div class="mb-3 col">
+        <label class="form-label">Role</label>
+        <select type="text" formControlName="role" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+          <option value="CHAIR">
+            CHAIR
+          </option>
+          <option value="STAKEHOLDER">
+            STAKEHOLDER
+          </option>
+          <option value="MEMBER">
+            MEMBER
+          </option>
+        </select>
+        <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+          <div *ngIf="f.role.errors?.required">Select a Role</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3 col">
+      <label class="form-label">Department</label>
+      <select type="text" formControlName="department" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.department.errors }">
+        <option value="BSIT">
+          BSIT
+        </option>
+        <option value="BLIS">
+          BLIS
+        </option>
+      </select>
+      <div *ngIf="submitted && f.department.errors" class="invalid-feedback">
+        <div *ngIf="f.department.errors?.required">Select a Department</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <button [disabled]="submitting" class="btn btn-primary">
+        <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+        Save
+      </button>
+      <a routerLink="/users" class="btn btn-link">Cancel</a>
+    </div>
+  </form>
+  <div *ngIf="loading" class="text-center m-5">
+    <span class="spinner-border spinner-border-lg align-center"></span>
+  </div>
+
+</body>
+
+</html>
